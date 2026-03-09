@@ -1,95 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TR Pharmacy</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#eef2f7;
-padding:20px;
-}
-
-.container{
-background:white;
-padding:20px;
-border-radius:10px;
-max-width:700px;
-margin:auto;
-}
-
-input,button{
-padding:8px;
-margin:5px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-}
-
-th,td{
-border:1px solid #ccc;
-padding:8px;
-text-align:center;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+<header>
+<h1>TR Pharmacy</h1>
+<p>Quality Medicine & Healthcare</p>
+</header>
 
-<h2>TR Pharmacy Sales</h2>
-
-<input id="name" placeholder="Medicine Name">
-<input id="price" placeholder="Price">
-<input id="qty" placeholder="Qty">
-
-<button onclick="add()">Add Sale</button>
-
-<table>
-
+<section>
+<h2>Medicine List</h2>
+<input type="text" id="searchInput" onkeyup="searchMedicine()" placeholder="Search Medicine...">
+<table id="medicineTable">
 <tr>
 <th>Medicine</th>
-<th>Price</th>
-<th>Qty</th>
-<th>Total</th>
+<th>Price (Tk)</th>
+<th>Stock</th>
 </tr>
-
-<tbody id="list"></tbody>
-
+<tr>
+<td>Napa 500 mg</td>
+<td>10</td>
+<td>Available</td>
+</tr>
+<tr>
+<td>Seclo 20 mg</td>
+<td>7</td>
+<td>Available</td>
+</tr>
+<tr>
+<td>Histacin</td>
+<td>3</td>
+<td>Low stock</td>
+</tr>
+<tr>
+<td>Monas 10 mg</td>
+<td>12</td>
+<td>Available</td>
+</tr>
 </table>
+</section>
 
-<h3 id="total">Total Sale: 0</h3>
+<section>
+<h2>Order Medicine</h2>
+<form id="orderForm" onsubmit="submitOrder(event)">
+<label>Name:</label><br>
+<input type="text" id="customerName" required><br>
+<label>Phone:</label><br>
+<input type="text" id="customerPhone" required><br>
+<label>Medicine Name:</label><br>
+<input type="text" id="customerMedicine" required><br>
+<label>Quantity:</label><br>
+<input type="number" id="customerQuantity" required min="1"><br><br>
+<button type="submit">Submit Order via WhatsApp</button>
+</form>
+</section>
 
-</div>
-
-<script>
-
-let total=0;
-
-function add(){
-
-let n=document.getElementById("name").value;
-let p=document.getElementById("price").value;
-let q=document.getElementById("qty").value;
-
-let t=p*q;
-
-total+=Number(t);
-
-document.getElementById("list").innerHTML+=
-"<tr><td>"+n+"</td><td>"+p+"</td><td>"+q+"</td><td>"+t+"</td></tr>";
-
-document.getElementById("total").innerText="Total Sale: "+total;
-
-}
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
