@@ -1,68 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TR Pharmacy</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+// Search Medicine
+function searchMedicine() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let table = document.getElementById("medicineTable");
+    let tr = table.getElementsByTagName("tr");
 
-<header>
-<h1>TR Pharmacy</h1>
-<p>Quality Medicine & Healthcare</p>
-</header>
+    for (let i = 1; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            let text = td.textContent || td.innerText;
+            tr[i].style.display = text.toLowerCase().indexOf(input) > -1 ? "" : "none";
+        }
+    }
+}
 
-<section>
-<h2>Medicine List</h2>
-<input type="text" id="searchInput" onkeyup="searchMedicine()" placeholder="Search Medicine...">
-<table id="medicineTable">
-<tr>
-<th>Medicine</th>
-<th>Price (Tk)</th>
-<th>Stock</th>
-</tr>
-<tr>
-<td>Napa 500 mg</td>
-<td>10</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>Seclo 20 mg</td>
-<td>7</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>Histacin</td>
-<td>3</td>
-<td>Low stock</td>
-</tr>
-<tr>
-<td>Monas 10 mg</td>
-<td>12</td>
-<td>Available</td>
-</tr>
-</table>
-</section>
+// Submit order via WhatsApp
+function submitOrder(e) {
+    e.preventDefault();
+    let name = document.getElementById("customerName").value;
+    let phone = document.getElementById("customerPhone").value;
+    let medicine = document.getElementById("customerMedicine").value;
+    let quantity = document.getElementById("customerQuantity").value;
 
-<section>
-<h2>Order Medicine</h2>
-<form id="orderForm" onsubmit="submitOrder(event)">
-<label>Name:</label><br>
-<input type="text" id="customerName" required><br>
-<label>Phone:</label><br>
-<input type="text" id="customerPhone" required><br>
-<label>Medicine Name:</label><br>
-<input type="text" id="customerMedicine" required><br>
-<label>Quantity:</label><br>
-<input type="number" id="customerQuantity" required min="1"><br><br>
-<button type="submit">Submit Order via WhatsApp</button>
-</form>
-</section>
-
-<script src="script.js"></script>
-</body>
-</html>
+    let message = `Hello TR Pharmacy, I want to order:\nName: ${name}\nPhone: ${phone}\nMedicine: ${medicine}\nQuantity: ${quantity}`;
+    let whatsappURL = `https://wa.me/8801234567890?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+}
 body {
     font-family: Arial, sans-serif;
     background: #f2f2f2;
@@ -127,7 +89,7 @@ button {
 button:hover {
     background: #246b45;
 }
-// Search Medicine
+        // Search Medicine
 function searchMedicine() {
     let input = document.getElementById("searchInput").value.toLowerCase();
     let table = document.getElementById("medicineTable");
@@ -154,4 +116,4 @@ function submitOrder(e) {
     let whatsappURL = `https://wa.me/8801234567890?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
 }
-      
+        
